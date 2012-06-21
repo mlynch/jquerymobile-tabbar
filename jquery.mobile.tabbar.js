@@ -7,6 +7,9 @@
       var theme = this.element.jqmData('theme') || "a";
       this.element.addClass('ui-footer ui-footer-fixed ui-bar-' + theme);
 
+      // Make sure the page has padding added to it to account for the fixed bar
+      this.element.closest('[data-role="page"]').addClass('ui-page-footer-fixed');
+
       // Call the NavBar _create prototype
       $.mobile.navbar.prototype._create.call(this);
     },
