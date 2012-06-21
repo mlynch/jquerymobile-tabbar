@@ -13,6 +13,8 @@
 
     // Set the active URL for the Tab Bar, and highlight that button on the bar
     setActive: function(url) {
+      // Sometimes the active state isn't properly cleared, so we reset it ourselves
+      this.element.find('a').removeClass('ui-btn-active ui-state-persist');
       this.element.find('a[href="#' + url + '"]').addClass('ui-btn-active ui-state-persist');
     }
   });
