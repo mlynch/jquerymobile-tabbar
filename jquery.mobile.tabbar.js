@@ -10,6 +10,7 @@
       // Make sure the page has padding added to it to account for the fixed bar
       this.element.closest('[data-role="page"]').addClass('ui-page-footer-fixed');
 
+
       // Call the NavBar _create prototype
       $.mobile.navbar.prototype._create.call(this);
     },
@@ -18,22 +19,21 @@
     setActive: function(url) {
       // Sometimes the active state isn't properly cleared, so we reset it ourselves
       this.element.find('a').removeClass('ui-btn-active ui-state-persist');
-      this.element.find('a[href="#' + url + '"]').addClass('ui-btn-active ui-state-persist');
+      this.element.find('a[href="' + url + '"]').addClass('ui-btn-active ui-state-persist');
     }
   });
 
-  $(document).bind('pagecreate create', function(e) {
+  $(document).on('pagecreate create', function(e) {
     return $(e.target).find(":jqmData(role='tabbar')").tabbar();
   });
   
-  $(":jqmData(role='page')").live('pageshow', function(e) {
+  $(document).on('pageshow', ":jqmData(role='page')", function(e) {
     // Grab the id of the page that's showing, and select it on the Tab Bar on the page
     var tabBar, id = $(e.target).attr('id');
 
     tabBar = $.mobile.activePage.find(':jqmData(role="tabbar")');
     if(tabBar.length) {
-      tabBar.tabbar('setActive', id);
+      tabBar.tabbar('setActive', '#' + id);
     }
   });
-
 })(jQuery);
